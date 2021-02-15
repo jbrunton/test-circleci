@@ -8,11 +8,13 @@ orbs:
 jobs:
 
   test:
+    docker:
+    - image: circleci/node:12.14
     steps:
       - checkout
       - run:
           name: "run tests"
-          comment: "echo tests completed!"
+          command: "echo tests completed!"
 
 # Orchestrate or schedule a set of jobs
 workflows:
