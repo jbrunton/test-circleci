@@ -15,6 +15,15 @@ jobs:
       - run:
           name: "run tests"
           command: "echo tests completed!"
+          
+  build:
+    docker:
+    - image: circleci/node:12.14
+    steps:
+      - checkout
+      - run:
+          name: "build"
+          command: "echo build completed!"
 
 # Orchestrate or schedule a set of jobs
 workflows:
@@ -23,6 +32,14 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
-  test:
+      
+  build:
     jobs:
       - test
+      - hold:
+          type: approval
+          requires:
+           - test
+      - build:
+          requires:
+            - hold
