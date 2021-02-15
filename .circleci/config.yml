@@ -33,13 +33,6 @@ workflows:
     jobs:
       - welcome/run
       
-  build:
+  test:
     jobs:
       - test
-      - hold:
-          type: approval
-          requires:
-           - test
-      - build:
-          requires:
-            - hold
